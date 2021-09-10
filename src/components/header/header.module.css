@@ -1,0 +1,133 @@
+.header {
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.innerHeader {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  color: var(--grey-800);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.search {
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+  border-radius: 40px;
+  margin-left: 1rem;
+  overflow: hidden;
+  display: flex;
+  /* align-items: center; */
+  position: relative;
+  padding: 1rem 16rem 1rem 1rem;
+}
+.search > svg {
+  color: var(--prpl-400);
+  color: var(--prpl-400);
+  --size: 20px;
+  height: var(--size);
+  width: var(--size);
+  position: absolute;
+  left: 14px;
+
+}
+
+.settingsBtn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  margin-right: 1rem;
+  color: var(--prpl-700);
+}
+.settingsBtn svg {
+  --size: 16px;
+  height: var(--size);
+  width: var(--size);
+}
+
+.searchInput {
+  padding: 8px 16px 8px 45px;
+  background-color: transparent;
+  border-radius: 40px;
+  border: none;
+  font-size: 14px;
+}
+.searchInput:focus {
+  outline: none;
+}
+
+.dropdown {
+  padding-right: 12px;
+  font-size: 0.8rem;
+  color: var(--prpl-700);
+
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  /* margin-left: auto; */
+}
+.shopping {
+  display: flex;
+  margin-left: 0.6rem;
+}
+.btn {
+  border: none;
+
+  border-radius: 20px;
+
+  
+  /* color: ; */
+}
+
+.btn + .btn {
+  margin-left: 0.8rem;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn svg {
+  --size: 14px;
+  height: var(--size);
+  width: var(--size);
+}
+.circle {
+  /* height: 45px;
+  width: 45px; */
+  background-color: #555;
+  background-image:url("https://lh4.googleusercontent.com/-iyNH1rBu2AQ/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmjFFXuT9Kyt1ceQT8tfshZBxJgwg/s96-c/photo.jpg");
+  border-radius: 50%;
+  background-position: center;
+  padding: 40px
+}
+.userIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: url("https://res.cloudinary.com/di449masi/image/upload/v1601147199/Screen_Shot_2020-09-26_at_3.05.17_PM_inezu1.png");
+  --size: 30px;
+  height: var(--size);
+  width: var(--size);
+}
+
+.sell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.sell svg {
+  margin-right: 10px;
+}

@@ -1,0 +1,124 @@
+.content {
+  padding: 1rem;
+}
+
+.hero {
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 3rem 4rem;
+  }
+}
+
+.titleTag {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 12px;
+  color: var(--prpl-700);
+  display: flex;
+  align-items: center;
+}
+
+.titleTag > svg {
+  --size: 16px;
+  width: var(--size);
+  height: var(--size);
+
+  margin-right: 4px;
+}
+
+.bigTitle {
+  font-size: 3.4rem;
+  margin: 0;
+  animation: bounce 0.5s cubic-bezier(0.5, 0.05, 1, 0.5); 
+}
+
+.titleLead {
+  color: var(--grey-300);
+  font-size: 12px;
+  margin: 0;
+}
+.heroCta {
+  margin-top: 36px;
+  padding: 0.8rem 2.2rem;
+  font-size: 1rem;
+  background: linear-gradient(90deg,  #daae51  0%, #d53369 100%);
+  color: var(--prpl-100);
+  border: none;
+  border-radius: 50px;
+}
+
+.heroCta:focus {
+  outline: none;
+}
+
+.catTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.catTitle h3 {
+  font-weight: bold;
+  font-size: 14px;
+}
+.catTitle a {
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--grey-300);
+  text-decoration: none;
+}
+
+.catList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cat {
+  --size: 102px;
+  width: var(--size);
+  height: var(--size);
+  padding: 1rem;
+
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
+  margin-bottom: 0.5rem;
+
+  font-size: 10px;
+  color: var(--grey-600);
+  background: linear-gradient(90deg,  #daae51  0%, #d53369 100%);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.cat:hover {
+  background:linear-gradient(90deg, #d53369   0%, #daae51 100%);
+
+}
+.catIcon {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.catIcon svg {
+  --size: 28px;
+  width: var(--size);
+  height: var(--size);
+}
+
+.catLabel {
+  font-weight: bold;
+}

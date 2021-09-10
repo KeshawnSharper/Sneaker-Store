@@ -1,0 +1,52 @@
+:root {
+  --prpl-100: #f1f5ff;
+  --prpl-400: #4547ed;
+  --prpl-700: #200897;
+
+  --grey-300: #a8acb3;
+  --grey-600: #4c4d4f;
+  --grey-800: #2a2b2e;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.app {
+  font-family: 'Raleway', 'Comfortaa', sans-serif;
+  max-width: 960px;
+  margin: auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+code {
+  background-color: #d6f1f1;
+  color: darkslategray;
+  font-size: 120%;
+  font-weight: lighter;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+.header_header__v9FKw{
+  background: none;
+}
