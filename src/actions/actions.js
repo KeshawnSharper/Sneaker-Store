@@ -7,6 +7,13 @@ export function addToCart (item) {
         item,
       };
 }
+export function addToCart (item) {
+    console.log(item)
+    return {
+        type: "ADD_TO_CART",
+        item,
+      };
+}
 export function removeFromCart (id) {
     console.log(id)
     return {type:"REMOVE_FROM_CART",payload:id}

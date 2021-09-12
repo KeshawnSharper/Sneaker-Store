@@ -29,21 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RelatedSneakers({brand}) {
+export default function RelatedSneakers({id}) {
     const [relatedSneakers,setRelatedSneakers] = useState([])
     useEffect(() => {
     axios
         .get(
-            `https://api.thesneakerdatabase.com/v1/sneakers?limit=100&brand=${brand}`,
-          {
-            headers: {
-              "accept": "application/json"
-            }
-          }
-        )
+            `http://localhost:5000/reccommended_sneakers/${id}`)
         .then((response) => {
-            console.log(brand)
-            let shoes = response.data.results
+            let shoes = response.data
             shoes = shoes.filter(sneak => (
               sneak.retailPrice !== null
             ))
@@ -53,10 +46,10 @@ export default function RelatedSneakers({brand}) {
           setRelatedSneakers(shoes)
           console.log(response.data.results)
         })
-    },[brand])
+    },[id])
     const classes = useStyles();
     return (
-        <div>
+        <div style={{"overflow-y":"scroll"}}>
          
         <GridList className={classes.gridList} cols={2.5}>
         {relatedSneakers.map((sneaker) => (

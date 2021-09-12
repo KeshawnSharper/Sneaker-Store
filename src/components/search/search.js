@@ -42,30 +42,15 @@ export default function Search(props) {
   }
   console.log(props.match.params.shoe)
   const [sneakers,setSneakers] = useState([])
+  const [searchedSneakers,setSearchedSneakers] = useState([])
   const classes = useStyles();
   
   useEffect(() => {
-    
-    let api = `https://api.thesneakerdatabase.com/v1/sneakers?limit=100`
-    
-    if (props.match.params.shoe ){
-      let shoe = props.match.params.shoe.replace(/ /g, "%20");
-api += `&shoe=${shoe}`
-    }
-    if (localStorage.getItem("brand") ){
-api += `&brand=${localStorage.getItem("brand")}`
-    }
-    axios
-    .get(
-      api,
-      {
-        headers: {
-          "accept": "application/json"
-        }
-      }
-    )
+    if (!JSON.parse(localStorage.getItem("sneakers"))){
+    axios.get(`http://localhost:5000/sneakers`)
     .then((response) => {
-      let shoes = response.data.results
+      localStorage.setItem("sneakers",JSON.stringify(response.data))
+      let shoes = response.data
       shoes = shoes.filter(sneak => (
         sneak.retailPrice !== null
       ))
@@ -73,40 +58,28 @@ api += `&brand=${localStorage.getItem("brand")}`
         sneak.media.imageUrl !== null
       ))
       setSneakers(shoes)
-      
-
+      setSearchedSneakers(shoes)
     })
+  }
+  else{
+  setSneakers(JSON.parse(localStorage.getItem("sneakers")))
+  setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
+  console.log(sneakers)
+  }
   },[props.match.params.shoe])
  
   const search = () => {
-    let api = `https://api.thesneakerdatabase.com/v1/sneakers?limit=100`
     
     if (value !== "" ){
-      let shoe = value.replace(/ /g, "%20");
-api += `&shoe=${shoe}`
+      console.log(searchedSneakers)
+      console.log(value)
+      setSearchedSneakers(sneakers.filter(sneaker => sneaker.brand.toUpperCase().includes(value.toUpperCase()) || sneaker.colorway.toUpperCase().includes(value.toUpperCase()) || sneaker.gender.toUpperCase().includes(value.toUpperCase()) ||sneaker.name.toUpperCase().includes(value.toUpperCase()) || sneaker.shoe.toUpperCase().includes(value.toUpperCase())))
+      console.log(sneakers)
+    }else{
+      console.log(sneakers)
+      setSearchedSneakers(sneakers)
     }
-
-    axios
-    .get(
-      api,
-      {
-        headers: {
-          "accept": "application/json"
-        }
-      }
-    )
-    .then((response) => {
-      let shoes = response.data.results
-      shoes = shoes.filter(sneak => (
-        sneak.retailPrice !== null
-      ))
-      shoes = shoes.filter(sneak => (
-        sneak.media.imageUrl !== null
-      ))
-      setSneakers(shoes)
-      localStorage.removeItem("title")
-      localStorage.removeItem("brand")
-    })
+      
   }
   const handleGender = (event) => {
     setGender(event.target.value);
@@ -117,83 +90,33 @@ api += `&shoe=${shoe}`
   const handleYear = (event) => {
     setYear(event.target.value);
   };
-  const filterShoes = (event) => {
-  let api = `https://api.thesneakerdatabase.com/v1/sneakers?limit=100`
-    
+  const filterShoes = () => {
+    setSearchedSneakers(sneakers)
+    console.log(sneakers)
   if ( gender !== ""){
-api += `&gender=${gender}`
+    console.log(gender)
+    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.gender.toUpperCase() === gender.toUpperCase()))
+    console.log(gender,searchedSneakers.filter(sneaker => sneaker.gender.toUpperCase() === gender.toUpperCase()))
   }
   if (brand !== "" ){
-api += `&brand=${brand}`
+    console.log(brand)
+    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.brand.toUpperCase() === brand.toUpperCase()))
+    console.log(brand,searchedSneakers.filter(sneaker => sneaker.brand.toUpperCase() === brand.toUpperCase()))
   }
   if (year !== "" ){
-    api += `&releaseYear=${year}`
-      }
-  axios
-  .get(
-    api,
-    {
-      headers: {
-        "accept": "application/json"
-      }
-    }
-  )
-  .then((response) => {
-    
-    let arr = response.data.results
+    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.year === year))
+    console.log(searchedSneakers)
 
-   
+      }   
     if (price.min !== ""){
-      console.log(Number(price.min))
-      arr = arr.filter(sneaker => (
-        sneaker.retailPrice >= Number(price.min)
-      ))
-      console.log(arr)
+      setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.retailPrice >= Number(price.min)))
     }
     if (price.max !== ""){
-      arr = arr.filter(sneaker => (
-        sneaker.retailPrice <= Number(price.max)
-      ))
+      setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.retailPrice <= Number(price.min)))
     }
-    let shoes = arr
-      shoes = shoes.filter(sneak => (
-        sneak.retailPrice !== null
-      ))
-      shoes = shoes.filter(sneak => (
-        sneak.media.imageUrl !== null
-      ))
-      setSneakers(shoes)
-    
-  })
 }
-const reset = (event) => {
-  let api = `https://api.thesneakerdatabase.com/v1/sneakers?limit=100`
-    
-  axios
-  .get(
-    api,
-    {
-      headers: {
-        "accept": "application/json"
-      }
-    }
-  )
-  .then((response) => {
-    let shoes = response.data.results
-    shoes = shoes.filter(sneak => (
-      sneak.retailPrice !== null
-    ))
-    shoes = shoes.filter(sneak => (
-      sneak.media.imageUrl !== null
-    ))
-    setSneakers(shoes)
-    
-  
-    
-    setYear("")
-    setGender("")
-    setBrand("")
-  })
+const reset = () => {
+ setSearchedSneakers(sneakers)
 }
 
   return (
@@ -207,7 +130,7 @@ const reset = (event) => {
 				</svg> Heiir Feat
   </Link>
   <div className={styles.search}>
-  <div onClick={search}>
+  <div onClick={() => search()} style={{"cursor":"pointer"}}>
     <SearchIcon /> 
     </div>
     <input
@@ -303,7 +226,7 @@ const reset = (event) => {
         <div> </div> :
         <div> 
            <Grid container spacing={3}>
-      {sneakers.map(
+      {searchedSneakers.map(
         sneaker => (
           
         <Grid item xs={12} md={6}>
@@ -319,7 +242,6 @@ const reset = (event) => {
             <CardContent>
             
               <Typography gutterBottom variant="h5" component="h2">
-    
 {sneaker.title}
 
               </Typography>

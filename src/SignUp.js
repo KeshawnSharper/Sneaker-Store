@@ -18,25 +18,27 @@ export default function SignUp(props) {
    const handleSubmit = e => {
        e.preventDefault()
        setLoading(true)
-   Axios.post(`https://heir-shoes-be.herokuapp.com/register`,user).then(
+   Axios.post(`http://localhost:5000/register`,user).then(
        res => {
-        
-        Axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
-       res => {
-        localStorage.setItem(`email`,res.data.email)
-        localStorage.setItem(`token`,res.data.token)
-        localStorage.setItem(`id`,res.data.userid)
-        props.history.push(`/home`)
-        console.log(props)
-        setLoading(false)
+        console.log(res)
+      //   Axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
+      //  res => {
+      //   localStorage.setItem(`email`,res.data.email)
+      //   localStorage.setItem(`token`,res.data.token)
+      //   localStorage.setItem(`id`,res.data.userid)
+      //   props.history.push(`/home`)
+      //   console.log(props)
+      //   setLoading(false)
+      //  }
        }
    )
 
-       }
+       
       
-   )
+   
    .catch(
     err => {
+      console.log(err)
       setLoading(false)
     }
   )

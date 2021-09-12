@@ -11,23 +11,7 @@ import { connect } from "react-redux"
 function Product(props) {
     const [sneaker,setSneaker] = useState({})
     useEffect(() => {
-    
-        let api = `https://api.thesneakerdatabase.com/v1/sneakers/${props.match.params.id}`
-        
-        axios
-        .get(
-          api,
-          {
-            headers: {
-              "accept": "application/json"
-            }
-          }
-        )
-        .then((response) => {
-          
-          setSneaker(response.data.results[0])
-          console.log(response.data.results[0])
-        })
+        setSneaker(JSON.parse(localStorage.getItem("sneakers")).filter(item => item.id === props.match.params.id)[0])
       },[props.match.params.id])
       
     return (
@@ -43,9 +27,9 @@ function Product(props) {
      <Loader type="Puff" color="#00BFFF" height={100} width={100} /> 
      </div>
      : 
-     <div>
+     <div style={{"marginBottom":"2000px"}}>
        <Header />
-        <main>
+        <main style={{"marginBottom":"2000px"}}>
           <div className="container">
             <div className="grid second-nav">
               <div className="column-xs-12">
@@ -81,14 +65,12 @@ function Product(props) {
               <div className="column-xs-12">
                 <h3>You may also like</h3>
               </div>
-              <RelatedSneakers brand={sneaker.brand} />
+              <RelatedSneakers id={props.match.params.id} />
 
             </div>
           </div>
         </main>
-        <footer>
-         
-        </footer>
+     
         </div>
      }
     
