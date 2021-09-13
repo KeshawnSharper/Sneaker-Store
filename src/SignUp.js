@@ -21,15 +21,15 @@ export default function SignUp(props) {
    Axios.post(`http://localhost:5000/register`,user).then(
        res => {
         console.log(res)
-      //   Axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
-      //  res => {
-      //   localStorage.setItem(`email`,res.data.email)
-      //   localStorage.setItem(`token`,res.data.token)
-      //   localStorage.setItem(`id`,res.data.userid)
-      //   props.history.push(`/home`)
-      //   console.log(props)
-      //   setLoading(false)
-      //  }
+        Axios.post(`http://localhost:5000/login`,user).then(
+       res => {
+        localStorage.setItem(`email`,res.data.email)
+        localStorage.setItem(`token`,res.data.token)
+        localStorage.setItem(`id`,res.data.id)
+        props.history.push(`/home`)
+        console.log(props)
+        setLoading(false)
+       })
        }
    )
 
@@ -60,7 +60,7 @@ export default function SignUp(props) {
         <input className="un " onChange={handleChange} name="email"type="text" align="center" placeholder="Email" />
         <input className="pass" onChange={handleChange} name="user_name"type="userName" align="center" placeholder="Username" />
         <input className="pass" onChange={handleChange} name="password"type="password" align="center" placeholder="Password" />
-        <button className="submit" align="center" onClick={handleSubmit}>SignUp</button>
+        <button className="submit" align="center" onClick={(e) => handleSubmit(e)}>SignUp</button>
         <Link to="/signin"><p className="forgot" align="center">Sign In</p></Link>
         {/* <p className="forgot" align="center"><a href="#">Forgot Password?</a></p><a href="#"> */}
         {/* <div className="g-signin2  btn-lg " data-onsuccess="onSignIn" data-theme="dark"></div> */}
