@@ -46,8 +46,9 @@ export default function Search(props) {
   const classes = useStyles();
   
   useEffect(() => {
+    console.log()
     if (!JSON.parse(localStorage.getItem("sneakers"))){
-    axios.get(`http://localhost:5000/sneakers`)
+    axios.get(`https://heir-shoes-be.herokuapp.com/sneakers`)
     .then((response) => {
       localStorage.setItem("sneakers",JSON.stringify(response.data))
       let shoes = response.data
@@ -58,25 +59,32 @@ export default function Search(props) {
         sneak.media.imageUrl !== null
       ))
       setSneakers(shoes)
+      if (localStorage.getItem("brand") !== ""){
+        shoes = shoes.filter(sneak => (
+          sneak.brand === localStorage.getItem("brand")
+        ))
+      }
       setSearchedSneakers(shoes)
     })
   }
   else{
   setSneakers(JSON.parse(localStorage.getItem("sneakers")))
-  setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
-  console.log(sneakers)
+  if (localStorage.getItem("brand") !== ""){
+  setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")).filter(sneak => (
+    sneak.brand === localStorage.getItem("brand")
+  )))
+  }
+  else{
+    setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
+  }
   }
   },[props.match.params.shoe])
  
   const search = () => {
     
     if (value !== "" ){
-      console.log(searchedSneakers)
-      console.log(value)
       setSearchedSneakers(sneakers.filter(sneaker => sneaker.brand.toUpperCase().includes(value.toUpperCase()) || sneaker.colorway.toUpperCase().includes(value.toUpperCase()) || sneaker.gender.toUpperCase().includes(value.toUpperCase()) ||sneaker.name.toUpperCase().includes(value.toUpperCase()) || sneaker.shoe.toUpperCase().includes(value.toUpperCase())))
-      console.log(sneakers)
     }else{
-      console.log(sneakers)
       setSearchedSneakers(sneakers)
     }
       
@@ -91,7 +99,7 @@ export default function Search(props) {
     setYear(event.target.value);
   };
   const filterShoes = () => {
-    setSearchedSneakers(sneakers)
+    reset()
     console.log(sneakers)
   if ( gender !== ""){
     console.log(gender)

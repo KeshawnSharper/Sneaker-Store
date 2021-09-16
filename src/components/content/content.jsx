@@ -4,10 +4,12 @@ import HeroImage from './hero-image'
 import styles from './content.module.css'
 
 import LabelIcon from '../icons/label'
-import More from '../icons/more'
 import { Link } from "react-router-dom";
 import Header from '../header/header'
 localStorage.setItem("component","Content" )
+const setNoBrand = () => {
+  localStorage.setItem("brand","")
+}
 const Content = (props) => (
   <div className={styles.content}>
     <Header props={props}/>
@@ -20,7 +22,7 @@ const Categories = () => (
   <div>
     <div className={styles.catTitle}>
       <h3>Brands</h3>
-      <Link to="/shop">See all</Link>
+      <Link to="/shop" onClick={() => setNoBrand()}>See all</Link>
     </div>
     <div className={styles.catList}>
       {[
@@ -31,7 +33,6 @@ const Categories = () => (
         { label: 'Under Armour', icon:<img alt="" src="https://logos-download.com/wp-content/uploads/2016/09/Under_Armour_logo.png" width="40" height="40"/> },
         { label: 'Reebok', icon: <img alt="" src="https://logos-download.com/wp-content/uploads/2016/02/Reebok_logo.png" width="100" height="40"/> },
         { label: 'Puma', icon: <img alt="" src="https://www.logosurfer.com/wp-content/uploads/2018/03/puma-logo_0.png" width="60" height="40"/> },
-        { label: 'Other', icon: <More /> },
       ].map(({ label, icon }, index) => (
         <Cat label={label} icon={icon} key={index} />
       ))}

@@ -78,7 +78,7 @@ const purchase = (order) => {
   return (
     <div className="container">
       <StripeCheckout
-        stripeKey="pk_test_51GmhlnFRrEOe5mtdA8OzDmWFpoOl2qGOJ4zBOY0FemAGiX9br4wn4cwRSQ0lScSGdUU8Zbyp1I3J5hu6EnueShqm004LjHrcgs"
+        stripeKey={process.env.REACT_APP_STRIPE_KEY}
         token={handleToken}
         amount={props.total * 100}
         billingAddress

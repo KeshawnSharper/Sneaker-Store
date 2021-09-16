@@ -55,7 +55,7 @@ export function getOrders () {
     
     return (dispatch) => {
         
-        axios.get(`https://heir-shoes-be.herokuapp.com/orders/${localStorage.getItem("id")}`)
+        axios.get(`https://heir-shoes-be.herokuapp.com//orders/${localStorage.getItem("id")}`)
   .then(res => {
       console.log(res.data)
       dispatch({type:"ORDERS",payload:res.data})

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import './Product.scss'
-import axios from "axios";
 import Header from '../header/header'
 import RelatedSneakers from './relatedSneakers'
 import {addToCart} from '../../actions/actions'

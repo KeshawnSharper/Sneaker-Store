@@ -34,7 +34,7 @@ export default function RelatedSneakers({id}) {
     useEffect(() => {
     axios
         .get(
-            `http://localhost:5000/reccommended_sneakers/${id}`)
+            `https://heir-shoes-be.herokuapp.com/reccommended_sneakers/${id}`)
         .then((response) => {
             let shoes = response.data
             shoes = shoes.filter(sneak => (

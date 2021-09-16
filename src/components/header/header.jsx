@@ -1,31 +1,34 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import SearchIcon from '../icons/search'
 import styles from './header.module.css'
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ViewListIcon from '@material-ui/icons/ViewList';
 function Header({props}) {
-  localStorage.setItem("component","Search" )
-  console.log(localStorage.getItem("component"))
   const [value,setValue] = useState("")
   const handleChange = e => {
     setValue(e.target.value)
     console.log(value)
+  }
+  useEffect(() => {
+    localStorage.setItem("component","Search" )
+    console.log(localStorage.getItem("component"))
    
-  }
-  // console.log(props)
-  if(props){
-    if(props.match){
-      if(props.match.params){
-        if(props.match.params.email){
-      localStorage.setItem("id",props.match.params.id )
-      localStorage.setItem("email",props.match.params.email )
-      localStorage.setItem("token",props.match.params.token )
-        }
+    // console.log(props)
+    if(props){
+      if(props.match){
+        if(props.match.params){
+          if(props.match.params.email){
+        localStorage.setItem("id",props.match.params.id )
+        localStorage.setItem("email",props.match.params.email )
+        localStorage.setItem("token",props.match.params.token )
+          }
+      }
+      
     }
-    
   }
-}
+  },[props])
+
   // console.log(props.match)
 return (
 <header className={styles.header}>

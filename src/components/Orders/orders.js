@@ -1,14 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from '../header/header'
 import {getOrders,deleteOrder } from '../../actions/actions'
 import { connect } from "react-redux";
+import axios from "axios";
 
  function Orders(props) {
+   let [orders,setOrders] = useState([])
     useEffect(() => {
-      props.getOrders()
-
-    },[props])
+        axios.get(`https://heir-shoes-be.herokuapp.com/orders/${localStorage.getItem("id")}`)
+        .then((response) => {
+          setOrders(response.data)
+        })
+    },[orders])
+    const deleteOrders = (id) => {
+      console.log(id)
+      console.log(orders)
+      setOrders(orders.filter(order => Number(order.id) !== Number(id)))
+      props.deleteOrder(id)
+    }
     return (
         <div>
         <Header />
@@ -18,10 +28,12 @@ import { connect } from "react-redux";
           <h1>Orders</h1>
           <Link to="/shop" className="continue">Continue Shopping</Link >
         </div>
+        {orders.length > 0 ?
+        
         <div className="cart">
           <ul className="cartWrap">
             
-              {props.orders.map(
+              {orders.map(
                   sneaker => (
 <li className="items odd">
               <div className="infoWrap"> 
@@ -35,7 +47,7 @@ import { connect } from "react-redux";
                 <div className="prodTotal cartSection">
                   <p>${sneaker.price}</p>
                 </div>
-                <div className="cartSection removeWrap" onClick={e => props.deleteOrder(sneaker.id)}>
+                <div className="cartSection removeWrap" onClick={e => deleteOrders(sneaker.id)}>
                   <button className="remove">x</button>
                 </div>
               </div>
@@ -49,6 +61,9 @@ import { connect } from "react-redux";
             {/*<li class="items even">Item 2</li>*/}
           </ul>
         </div>
+        :
+        null
+ }
       </div>
       </div>
     )
