@@ -99,29 +99,31 @@ export default function Search(props) {
     setYear(event.target.value);
   };
   const filterShoes = () => {
-    reset()
-    console.log(sneakers)
+    console.log(searchedSneakers,sneakers)
+    let search = sneakers
   if ( gender !== ""){
     console.log(gender)
-    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.gender.toUpperCase() === gender.toUpperCase()))
+    search = search.filter(sneaker => sneaker.gender.toUpperCase() === gender.toUpperCase())
     console.log(gender,searchedSneakers.filter(sneaker => sneaker.gender.toUpperCase() === gender.toUpperCase()))
   }
   if (brand !== "" ){
     console.log(brand)
-    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.brand.toUpperCase() === brand.toUpperCase()))
+    search = search.filter(sneaker => sneaker.brand.toUpperCase() === brand.toUpperCase())
     console.log(brand,searchedSneakers.filter(sneaker => sneaker.brand.toUpperCase() === brand.toUpperCase()))
   }
   if (year !== "" ){
-    setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.year === year))
+
+    search = search.filter(sneaker => Number(sneaker.year) === Number(year))
     console.log(searchedSneakers)
 
       }   
     if (price.min !== ""){
-      setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.retailPrice >= Number(price.min)))
+      search = search.filter(sneaker => sneaker.retailPrice >= Number(price.min))
     }
     if (price.max !== ""){
-      setSearchedSneakers(searchedSneakers.filter(sneaker => sneaker.retailPrice <= Number(price.min)))
+      search = search.filter(sneaker => sneaker.retailPrice <= Number(price.max))
     }
+    setSearchedSneakers(search)
 }
 const reset = () => {
  setSearchedSneakers(sneakers)

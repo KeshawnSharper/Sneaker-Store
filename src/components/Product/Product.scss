@@ -258,17 +258,7 @@ footer {
     width: 100%;
   }
 
-  .product-image {
-    display: block;
-    img {
-      height: 60rem;
-    //   width: 100rem;
-      &.active {
-        display: block;
-        margin: 0 0 0.75rem 0;
-      }
-    }
-  }
+
   
   .image-list {
     display: flex;
