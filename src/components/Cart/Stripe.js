@@ -9,8 +9,8 @@ import {removeCart} from '../../actions/actions'
 // toast.configure;
 const mapStateToProps = () => {
   return {
-    cart: JSON.parse(localStorage.getItem("cart")).cart,
-    total: localStorage.getItem("total")
+    cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : [],
+    total: localStorage.getItem("total") ? localStorage.getItem("total") :0
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -27,17 +27,31 @@ function Stripe(props) {
     name: "tesla Roadster",
     price: Number((Number(localStorage.getItem("total")) + Number(4.99) + Number(localStorage.getItem("total") * 0.07)).toFixed(2))
   })
-const purchase = (order) => {
-    axios.post("https://heir-shoes-be.herokuapp.com/orders", order).then((res) => {
-      localStorage.setItem("total",0)
-      localStorage.setItem("cart",JSON.stringify({cart:[]}))
-      console.log(order);
-    })
+// const purchaseAll = () => {
+//     console.log(props.cart)
+//     props.cart.map((shoe,i) => {
+//       shoe.index = i
+//       shoe.user_id = Number(localStorage.getItem("id"))
+//       shoe.price = shoe.retailPrice
+//       shoe.img = shoe.media.smallImageUrl
+//       shoe.name = shoe.title
+//       shoe.product_id = shoe.id;
+//       shoe.email = localStorage.getItem("email");
+//       shoe.street =
+//         info.billing_address_line1 +
+//         info.billing_address_state +
+//         info.billing_address_zip;
+//         shoe.city = info.shipping_address_city;
+//         shoe.country = info.shipping_address_country;
+//         shoe.delivered = false;
+//         shoe.date_ordered = new Date();
+      
 
-  };
+//     })
+    
+//   };
   async function handleToken(token, address) {
-    const response = await axios.post(
-      "https://heir-shoes-be.herokuapp.com/checkout",
+    const response = await axios.post("https://heir-shoes-be.herokuapp.com/checkout",
       {
         token,
         product
@@ -54,9 +68,10 @@ const purchase = (order) => {
     console.log(response.data);
   }
   const purchaseCartItems = (info) => {
-    props.cart.forEach((item) => {
+    props.cart.forEach((item,i) => {
       console.log(item)
       const product = {}
+      product.index = i
       product.user_id = Number(localStorage.getItem("id"))
       product.price = item.retailPrice
       product.img = item.media.smallImageUrl
@@ -71,8 +86,13 @@ const purchase = (order) => {
         product.country = info.shipping_address_country;
         product.delivered = false;
         product.date_ordered = new Date();
-      purchase(product);
+        axios.post("https://heir-shoes-be.herokuapp.com/orders", product).then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err))
     });
+    localStorage.setItem("cart",[])
+    localStorage.setItem("total",0)
     props.removeCart()
   };
   return (

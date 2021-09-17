@@ -19,6 +19,7 @@ import axios from "axios";
       setOrders(orders.filter(order => Number(order.id) !== Number(id)))
       props.deleteOrder(id)
     }
+    
     return (
         <div>
         <Header />

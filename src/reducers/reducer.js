@@ -55,17 +55,14 @@ sneaker.id !== action.payload
         case "REMOVE_CART":
         // Update total price of cart items
         // Subtract item base price + item quantity
-        let removed_cart = JSON.parse(localStorage.getItem("cart"))
         // console.log(cart.cart[0].id)
         
-        removed_cart.cart = []
-        localStorage.setItem("cart",JSON.stringify(removed_cart)) 
+        localStorage.setItem("cart",JSON.stringify({cart:[]}))
         localStorage.setItem("total",0) 
         return {
           ...state,
-          cart:state.cart.filter(sneaker => (
-sneaker.id !== action.payload
-          )),
+          cart:[],
+          total:0
         };
         case "DELETE_ORDER":
           // Update total price of cart items
