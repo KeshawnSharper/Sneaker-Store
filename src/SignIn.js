@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import './SignIn.css'
-import Axios from 'axios'
+import axios from 'axios'
 import { Link } from "react-router-dom";
 
 export default function SignIn(props) {
@@ -16,7 +16,7 @@ export default function SignIn(props) {
    }
    const handleSubmit = e => {
        e.preventDefault()
-   Axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
+   axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
        res => {
         localStorage.setItem(`email`,res.data.email)
         localStorage.setItem(`token`,res.data.token)
