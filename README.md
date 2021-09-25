@@ -18,6 +18,8 @@ ReactJS/JavaScript/Html/CSS/Redux/NodeJS/AWS
 No bugs 
 
 # How to use it:
+
+Link: https://heirfeet.netlify.app/
 1. Sign up or Sign in with a Heir Feet account
 2. On the home page choose a sneaker brand to search for or browse all to start
 3. Filter between shoes with the side nav or top search bar then pick a shoe to "buy"
