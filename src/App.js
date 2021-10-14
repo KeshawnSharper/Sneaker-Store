@@ -22,10 +22,9 @@ function App() {
     <div className="app">
     <Router>
       <Switch>
-      <Route exact path="/" component={Home} />
+      <ProtectedRoute exact path="/" component={Content} />
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
-        <ProtectedRoute exact path="/home" component={Content} />
         <ProtectedRoute exact path="/shop" component={Search} />
         <ProtectedRoute exact path="/shop/:shoe" component={Search} />
         <ProtectedRoute exact path="/product/:id" component={Product} />
