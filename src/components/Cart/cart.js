@@ -73,7 +73,7 @@ import { connect } from "react-redux";
             <li className="totalRow"><span className="label">Shipping</span><span className="value">$4.99</span></li>
             <li className="totalRow"><span className="label">Tax</span><span className="value">${(total.subtotal * 0.07).toFixed(2)}</span></li>
             <li className="totalRow final"><span className="label">Total</span><span className="value">{total.total}</span></li>
-           {Number(total) !== 0 ? <li className="totalRow"><Stripe total={Number((Number(total) + Number(4.99) + Number(total * 0.07)).toFixed(2))}/></li> : null} 
+           {Number(total.subtotal) !== 0 ? <li className="totalRow"><Stripe total={total.total} /></li> : null }
           </ul>
         </div>
       </div>

@@ -5,12 +5,11 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import StripeCheckout from "react-stripe-checkout";
 import {removeCart} from '../../actions/actions'
-
+import Loader from "react-loader-spinner";
 // toast.configure;
 const mapStateToProps = () => {
   return {
     cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : [],
-    total: localStorage.getItem("total") ? localStorage.getItem("total") :0
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -21,11 +20,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 function Stripe(props) {
-  
+  console.log(props.total)
   console.log(Number((Number(localStorage.getItem("total")) + Number(4.99) + Number(localStorage.getItem("total") * 0.07)).toFixed(2)))
   const [product] = React.useState({
-    name: "tesla Roadster",
-    price: Number((Number(localStorage.getItem("total")) + Number(4.99) + Number(localStorage.getItem("total") * 0.07)).toFixed(2))
+    name: "$" + props.total,
+    price: props.total
   })
 // const purchaseAll = () => {
 //     console.log(props.cart)
@@ -96,6 +95,14 @@ function Stripe(props) {
     props.removeCart()
   };
   return (
+    <>
+    {
+      !props.total ?
+      <div style={{"width":"800px", "margin":"0 auto"}}>
+    <Loader type="Puff" color="#00BFFF" /> 
+    <p>Loading Sneakers</p>
+    </div>
+    :
     <div className="container">
       <StripeCheckout
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
@@ -103,9 +110,11 @@ function Stripe(props) {
         amount={props.total * 100}
         billingAddress
         shippingAddress
-        name={product.name}
+        name={`$ ${props.total} `}
       />
-    </div>
+      </div>
+    }
+    </>
   );
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Stripe);
