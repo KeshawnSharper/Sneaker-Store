@@ -47,7 +47,7 @@ export default function StripeDemoAlert({total}) {
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">URGENT: THIS IS JUST A DEMO</h2>
       <p id="simple-modal-description">
-        Thank you for using this application.</p><p>Use this demo credit card number: 4242 4242 4242 4242, date : 04/24, CVC 424
+        Thank you for using this application.</p><p>Use this demo credit card <p>number: 4242 4242 4242 4242</p> <p>date : 04/24 </p> CVC: 424<p></p>
       </p>
       <div onClick={() => handleClose()}>
       <Stripe total={total}/>
