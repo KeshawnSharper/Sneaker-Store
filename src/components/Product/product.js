@@ -88,5 +88,5 @@ function mapStateToProps(state) {
         dispatch(addToCart(item))
       }
     }
-  };
+  }
   export default connect(mapStateToProps,mapDispatchToProps)(Product);

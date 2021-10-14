@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './cart.scss'
 import Stripe from "./Stripe"
 import Header from '../header/header'
 import {removeFromCart} from '../../actions/actions'
 import { connect } from "react-redux";
- function Cart({cart,removeFromCart,total}) {
+ function Cart({cart,removeFromCart}) {
+   let [total,setTotal] = useState({})
+   const getTotal = () => {
+     let sub = 0
+    if (localStorage.getItem("cart")){
+     JSON.parse(localStorage.getItem("cart")).cart.map(a => sub += a.retailPrice)
+     console.log(sub)
+    }
+    setTotal(
+      {
+      subtotal : sub.toFixed(2),
+      total : Number((Number(sub) + Number(4.99) + Number(sub * 0.07))).toFixed(2)
+    })
+    console.log(total)
+  }
+   useEffect(() => {
+      getTotal()
+   },[cart.length])
+     
+     
+    console.log(total)
     return (
         <div>
         <Header />
@@ -49,10 +69,10 @@ import { connect } from "react-redux";
           <button className="btn">button</button></div>
         <div className="subtotal cf">
           <ul>
-            <li className="totalRow"><span className="label">Subtotal</span><span className="value">${total}</span></li>
+            <li className="totalRow"><span className="label">Subtotal</span><span className="value">${total.subtotal}</span></li>
             <li className="totalRow"><span className="label">Shipping</span><span className="value">$4.99</span></li>
-            <li className="totalRow"><span className="label">Tax</span><span className="value">${(total * 0.07).toFixed(2)}</span></li>
-            <li className="totalRow final"><span className="label">Total</span><span className="value">${Number((Number(total) + Number(4.99) + Number(total * 0.07)).toFixed(2)) }</span></li>
+            <li className="totalRow"><span className="label">Tax</span><span className="value">${(total.subtotal * 0.07).toFixed(2)}</span></li>
+            <li className="totalRow final"><span className="label">Total</span><span className="value">{total.total}</span></li>
            {Number(total) !== 0 ? <li className="totalRow"><Stripe total={Number((Number(total) + Number(4.99) + Number(total * 0.07)).toFixed(2))}/></li> : null} 
           </ul>
         </div>
@@ -62,17 +82,14 @@ import { connect } from "react-redux";
             }
             function mapStateToProps(state) {
                 return {
-                  cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : []  ,
-                  total: localStorage.getItem("total") ? localStorage.getItem("total") :0
-                };
+                  cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : [],
+                }
               }
               const mapDispatchToProps = (dispatch) => {
                 return {
                   removeFromCart: (id) => {
-                    dispatch(removeFromCart(id));
+                    dispatch(removeFromCart(id))
                   }
-                };
-              };
-              
-
-              export default connect(mapStateToProps,mapDispatchToProps)(Cart);
+              }
+            }
+export default connect(mapStateToProps,mapDispatchToProps)(Cart)
