@@ -5,6 +5,7 @@ import Stripe from "./Stripe"
 import Header from '../header/header'
 import {removeFromCart} from '../../actions/actions'
 import { connect } from "react-redux";
+import StripeDemoAlert from "./StripeDemoAlert";
  function Cart({cart,removeFromCart}) {
    let [total,setTotal] = useState({})
    const getTotal = () => {
@@ -73,7 +74,8 @@ import { connect } from "react-redux";
             <li className="totalRow"><span className="label">Shipping</span><span className="value">$4.99</span></li>
             <li className="totalRow"><span className="label">Tax</span><span className="value">${(total.subtotal * 0.07).toFixed(2)}</span></li>
             <li className="totalRow final"><span className="label">Total</span><span className="value">{total.total}</span></li>
-           {Number(total.subtotal) !== 0 ? <li className="totalRow"><Stripe total={total.total} /></li> : null }
+            {Number(total.subtotal) !== 0 ? <li className="totalRow"><StripeDemoAlert total={total.total}/></li> : null }
+           {/* {Number(total.subtotal) !== 0 ? <li className="totalRow"><Stripe total={total.total} /></li> : null } */}
           </ul>
         </div>
       </div>

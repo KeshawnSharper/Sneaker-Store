@@ -26,29 +26,6 @@ function Stripe(props) {
     name: "$" + props.total,
     price: props.total
   })
-// const purchaseAll = () => {
-//     console.log(props.cart)
-//     props.cart.map((shoe,i) => {
-//       shoe.index = i
-//       shoe.user_id = Number(localStorage.getItem("id"))
-//       shoe.price = shoe.retailPrice
-//       shoe.img = shoe.media.smallImageUrl
-//       shoe.name = shoe.title
-//       shoe.product_id = shoe.id;
-//       shoe.email = localStorage.getItem("email");
-//       shoe.street =
-//         info.billing_address_line1 +
-//         info.billing_address_state +
-//         info.billing_address_zip;
-//         shoe.city = info.shipping_address_city;
-//         shoe.country = info.shipping_address_country;
-//         shoe.delivered = false;
-//         shoe.date_ordered = new Date();
-      
-
-//     })
-    
-//   };
   async function handleToken(token, address) {
     const response = await axios.post("https://heir-shoes-be.herokuapp.com/checkout",
       {
