@@ -20,6 +20,8 @@ import TextField from '@material-ui/core/TextField';
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import Loader from "react-loader-spinner";
+
 
 const useStyles = makeStyles({
   root: {
@@ -128,6 +130,7 @@ export default function Search(props) {
 const reset = () => {
  setSearchedSneakers(sneakers)
 }
+console.log(searchedSneakers)
 
   return (
     <div>
@@ -164,6 +167,15 @@ const reset = () => {
       
     
   </header>
+  <>
+  {
+    searchedSneakers.length === 0
+    ?
+    <div style={{"width":"800px", "margin":"0 auto"}}>
+    <Loader type="Puff" color="#00BFFF" /> 
+    <p>Loading Sneakers</p>
+    </div>
+    :
   <div className="list">
   <div className="grid second-nav">
               <div className="column-xs-12">
@@ -278,7 +290,8 @@ const reset = () => {
         
         </Grid>
         </div>
-        
+        }
+        </>
     </div>
     
   
