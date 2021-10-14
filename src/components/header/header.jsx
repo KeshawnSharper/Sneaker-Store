@@ -36,14 +36,16 @@ return (
       <Brand />
       <Search value={value} handleChange={handleChange}/>
       <div className={styles.shopping}>
-      <Link to={`/cart`}>
+      <Link style={{"margin-right":"9px"}} to={`/cart`}>
       <ShoppingCartIcon />
+      <p style={{"fontSize":"9px"}}>Cart</p>
       </Link>
       </div>
      
       
       <Link to={`/orders`}>
       <ViewListIcon />
+      <p style={{"fontSize":"9px"}}>Past Orders</p>
       </Link>
       
       {/* <User /> */}
