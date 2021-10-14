@@ -23,6 +23,7 @@ function App() {
     <Router>
       <Switch>
       <ProtectedRoute exact path="/" component={Content} />
+      <ProtectedRoute exact path="/home" component={Content} />
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
         <ProtectedRoute exact path="/shop" component={Search} />
