@@ -49,11 +49,11 @@ export default function LogOutModal({total}) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <p id="simple-modal-title">Are you sure you want to log out?</p>
-     <button onClick={() => {
+     <button className="add-to-cart" style={{"padding":"15px","marginRight":"5px"}} onClick={() => {
        localStorage.clear()
        window.location.reload(false)
      }}>Yes</button>
-     <button onClick={handleClose}>No</button>
+     <button className="add-to-cart" style={{"padding":"15px","marginRight":"5px"}} onClick={handleClose}>No</button>
       
     </div>
   );
