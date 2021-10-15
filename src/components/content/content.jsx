@@ -31,7 +31,7 @@ const Categories = () => (
         { label: 'Jordan',value:"Jordan", icon: <img alt="" src="https://img.icons8.com/ios-filled/50/000000/air-jordan.png"/> },
         { label: 'New balance', value:"New Balance", icon: <img alt="" src="https://logos-download.com/wp-content/uploads/2016/02/New_Balance_black_logo.png" width="50" height="40"/> },
         { label: 'Puma', value:"Puma", icon: <img alt="" src="https://www.logosurfer.com/wp-content/uploads/2018/03/puma-logo_0.png" width="60" height="40"/> },
-      ].map(({ label, icon,value }, index) => (
+      ].map(({ label, icon, value }, index) => (
         <Cat label={label} icon={icon} value={value} key={index} />
       ))}
     </div>

@@ -8,8 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '../icons/search'
-import styles from '../header/header.module.css'
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -18,9 +16,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import { Link } from "react-router-dom";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ViewListIcon from '@material-ui/icons/ViewList';
+
 import Loader from "react-loader-spinner";
+import Header from '../header/header'
+
 
 
 const useStyles = makeStyles({
@@ -148,39 +147,7 @@ console.log(searchedSneakers)
 
   return (
     <div>
-    <header className={styles.header}>
-    <div className={styles.innerHeader}>
-    <Link to={`/home`} className={styles.brand}>
-   <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
-			<rect x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" fill="rgb(0,0,0)" /> 
-				<path class="plane-take-off" d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "/>
-				</svg> Heiir Feat
-  </Link>
-  <div className={styles.search}>
-  <div onClick={() => search()} style={{"cursor":"pointer"}}>
-    <SearchIcon /> 
-    </div>
-    <input
-      type="text"
-      placeholder="Search ..."
-      className={styles.searchInput}
-      onChange={handleChange}
-    />
-  </div>
-  <div className={styles.shopping}>
-  <Link to={`/cart`}>
-      <ShoppingCartIcon />
-      </Link>
-      </div>
-      <Link to={`/orders`}>
-      <ViewListIcon />
-      </Link>
-      </div>
-     
-      
-      
-    
-  </header>
+    <Header props={props}/>
   <>
   {
     searchedSneakers.length === 0
