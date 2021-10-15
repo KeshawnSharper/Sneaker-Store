@@ -4,6 +4,7 @@ import styles from './header.module.css'
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import LogoutIcon from '@mui/icons-material/Logout';
 function Header({props}) {
   const [value,setValue] = useState("")
   const handleChange = e => {
@@ -36,17 +37,23 @@ return (
       <Brand />
       <Search value={value} handleChange={handleChange}/>
       <div className={styles.shopping}>
-      <Link style={{"margin-right":"9px"}} to={`/cart`}>
+      <Link style={{"margin-right":"4px"}} to={`/cart`}>
       <ShoppingCartIcon />
       <p style={{"fontSize":"9px"}}>Cart</p>
       </Link>
       </div>
      
       
-      <Link to={`/orders`}>
+      <Link to={`/orders`} style={{"margin-right":"4px"}}>
       <ViewListIcon />
       <p style={{"fontSize":"9px"}}>Past Orders</p>
       </Link>
+      <div onClick={() => localStorage.clear()}>
+      <Link to={`/signin`}>
+      <LogoutIcon />
+      <p style={{"fontSize":"9px"}}>Log Out</p>
+      </Link>
+      </div>
       
       {/* <User /> */}
     </div>

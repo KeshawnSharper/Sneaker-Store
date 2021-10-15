@@ -2,13 +2,14 @@ import React,{useState} from 'react'
 import './SignIn.css'
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
 export default function SignIn(props) {
    const [user,setUser] = useState({
        email:"",
        password:""
    })
-
+   const [loading,setLoading] = useState(false)
    const handleChange = e => {
        setUser({...user,
         [e.target.name]:e.target.value})
@@ -16,8 +17,10 @@ export default function SignIn(props) {
    }
    const handleSubmit = e => {
        e.preventDefault()
+       setLoading(true)
    axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
        res => {
+        setLoading(false)
         localStorage.setItem(`email`,res.data.email)
         localStorage.setItem(`token`,res.data.token)
         localStorage.setItem(`id`,res.data.id)
@@ -28,6 +31,7 @@ export default function SignIn(props) {
    )
    .catch(
     err => {
+      setLoading(false)
       console.log(err)
     }
   )
@@ -37,6 +41,14 @@ export default function SignIn(props) {
 }
   return (
     <div>
+      {  
+      loading 
+      ?
+      <div style={{"width":"800px", "margin":"0 auto"}}>
+    <Loader type="Puff" color="#00BFFF" /> 
+    <p>Authenicating...</p>
+    </div>
+    :
     <div className="main">
       <p className="sign" align="center">Sign in</p>
       <form className="form1">
@@ -46,6 +58,7 @@ export default function SignIn(props) {
         <Link to="/signup"><p className="forgot" align="center">Sign Up</p></Link>
     </form>
     </div>
+}
     </div>
   )
 }

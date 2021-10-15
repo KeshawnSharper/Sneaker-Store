@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import './SignIn.css'
 import Axios from 'axios'
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
+
 
 export default function SignUp(props) {
    const [user,setUser] = useState({
@@ -51,7 +53,10 @@ export default function SignUp(props) {
       {
         loading 
         ?
-<div class="loader"></div>
+<div style={{"width":"800px", "margin":"0 auto"}}>
+    <Loader type="Puff" color="#00BFFF" /> 
+    <p>Authenicating...</p>
+    </div>
   :
 
     <div className="main">
