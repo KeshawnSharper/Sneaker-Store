@@ -61,6 +61,7 @@ export default function Search(props) {
         sneak.media.imageUrl !== null
       ))
       setSneakers(shoes)
+      console.log(sneakers,shoes)
       if (localStorage.getItem("brand") !== ""){
         shoes = shoes.filter(sneak => (
           sneak.brand === localStorage.getItem("brand")
@@ -72,6 +73,7 @@ export default function Search(props) {
   else{
   setSneakers(JSON.parse(localStorage.getItem("sneakers")))
   if (localStorage.getItem("brand") !== ""){
+    console.log(sneakers)
   setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")).filter(sneak => (
     sneak.brand === localStorage.getItem("brand")
   )))
@@ -79,8 +81,9 @@ export default function Search(props) {
   else{
     setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
   }
+  console.log("branded",searchedSneakers)
   }
-  },[props.match.params.shoe])
+  },[sneakers.length])
  
   const search = () => {
     
