@@ -4,7 +4,7 @@ import styles from './header.module.css'
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ViewListIcon from '@material-ui/icons/ViewList';
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogOutModal from "./LogoutModal";
 function Header({props}) {
   const [value,setValue] = useState("")
   const handleChange = e => {
@@ -48,13 +48,7 @@ return (
       <ViewListIcon />
       <p style={{"fontSize":"9px"}}>Past Orders</p>
       </Link>
-      <div onClick={() => localStorage.clear()}>
-      <Link to={`/signin`}>
-      <LogoutIcon />
-      <p style={{"fontSize":"9px"}}>Log Out</p>
-      </Link>
-      </div>
-      
+      <LogOutModal style={{"fontSize":"9px"}}/>
       {/* <User /> */}
     </div>
   </header>
