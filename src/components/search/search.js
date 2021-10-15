@@ -95,10 +95,21 @@ export default function Search(props) {
       
   }
   const handleGender = (event) => {
+    console.log(event.target.value)
+    if (event.target.value === gender){
+      setGender("")
+    }
+    else{
     setGender(event.target.value);
+    }
   };
   const handleBrand = (event) => {
-    setBrand(event.target.value);
+    if (event.target.value === brand){
+      setBrand("")
+    }
+    else{
+      setBrand(event.target.value);
+    }
   };
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -198,28 +209,28 @@ console.log(searchedSneakers)
         <Grid item xs={12} md={2}>
         <FormControl component="fieldset">
       <FormLabel component="legend">Gender</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={handleGender}>
-        <FormControlLabel value="women" control={<Radio />} label="Female" />
-        <FormControlLabel value="men" control={<Radio />} label="Male" />
+      <RadioGroup aria-label="gender" name="gender1" value={gender} >
+        <FormControlLabel value="women" control={<Radio />} label="Female" onClick={handleGender}/>
+        <FormControlLabel value="men" control={<Radio />} label="Male" onClick={handleGender} />
         
       </RadioGroup>
     </FormControl>
     <br/>
     <FormControl component="fieldset">
       <FormLabel component="legend">Brands</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={brand} onChange={handleBrand}>
-        <FormControlLabel value="ASICS" control={<Radio />} label="ASICS" />
-        <FormControlLabel value="CONVERSE" control={<Radio />} label="CONVERSE" />
-        <FormControlLabel value="JORDAN" control={<Radio />} label="JORDAN" />
-        <FormControlLabel value="NEW%20BALANCE" control={<Radio />} label="NEW BALANCE" />
-        <FormControlLabel value="NIKE" control={<Radio />} label="NIKE" />
-        <FormControlLabel value="PUMA" control={<Radio />} label="PUMA" />
-        <FormControlLabel value="REEBOK" control={<Radio />} label="REEBOK" />
-        <FormControlLabel value="SAUCONY" control={<Radio />} label="SAUCONY" />
-        <FormControlLabel value="UNDER%20ARMOUR" control={<Radio />} label="UNDER ARMOUR" />
-        <FormControlLabel value="VANS" control={<Radio />} label="VANS" />
-        <FormControlLabel value="YEEZY" control={<Radio />} label="YEEZY" />
-        <FormControlLabel value="ADIDAS" control={<Radio />} label="ADIDAS" />
+      <RadioGroup aria-label="gender" name="gender1" value={brand} >
+        <FormControlLabel value="ASICS" control={<Radio />} label="ASICS" onClick={handleBrand}/>
+        <FormControlLabel value="CONVERSE" control={<Radio />} label="CONVERSE" onClick={handleBrand}/>
+        <FormControlLabel value="JORDAN" control={<Radio />} label="JORDAN" onClick={handleBrand}/>
+        <FormControlLabel value="NEW%20BALANCE" control={<Radio />} label="NEW BALANCE" onClick={handleBrand}/>
+        <FormControlLabel value="NIKE" control={<Radio />} label="NIKE" onClick={handleBrand}/>
+        <FormControlLabel value="PUMA" control={<Radio />} label="PUMA" onClick={handleBrand}/>
+        <FormControlLabel value="REEBOK" control={<Radio />} label="REEBOK" onClick={handleBrand}/>
+        <FormControlLabel value="SAUCONY" control={<Radio />} label="SAUCONY" onClick={handleBrand}/>
+        <FormControlLabel value="UNDER%20ARMOUR" control={<Radio />} label="UNDER ARMOUR" onClick={handleBrand}/>
+        <FormControlLabel value="VANS" control={<Radio />} label="VANS" onClick={handleBrand}/>
+        <FormControlLabel value="YEEZY" control={<Radio />} label="YEEZY" onClick={handleBrand}/>
+        <FormControlLabel value="ADIDAS" control={<Radio />} label="ADIDAS" onClick={handleBrand}/>
       </RadioGroup>
       <TextField id="standard-basic" label="Year" onChange={handleYear}/>
       <br/>
