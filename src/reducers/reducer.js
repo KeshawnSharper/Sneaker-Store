@@ -5,29 +5,9 @@ export const StoreReducer = (state = initState, action) => {
       case "ADD_TO_CART":
       // Update total price of cart items
       // Subtract item base price + item quantity
-      if (!localStorage.getItem("cart")) {
-        let cart = {cart:[action.item]}
-        localStorage.setItem("cart",JSON.stringify(cart)) 
-            }
-            else{
-              let cart = JSON.parse(localStorage.getItem("cart"))
-              cart.cart.push(action.item)
-              localStorage.setItem("cart",JSON.stringify(cart)) 
-              console.log(cart)
-            }
-            if (!localStorage.getItem("total")) {
-              localStorage.setItem("total",action.item.retailPrice) }
-                  else{
-                    localStorage.setItem("total",Number(localStorage.getItem("total")) + Number(action.item.retailPrice)) 
-                  }
-      // let cart = JSON.parse(localStorage.getItem("cart")).cart
-      console.log(localStorage.getItem("cart"))
-      console.log(state.cart)
-      // localStorage.setItem("cart",JSON.parse(localStorage.getItem("cart")).cart.push(action.item)) 
-      // console.log(localStorage.getItem("cart"))
       return {
         ...state,
-        cart:[...state.cart,action.item],
+        cart: state.cart === [] ? [action.item] : state.cart.filter(item => item.id === action.item.id).length < 1 ? [...state.cart, action.item] : state.cart.map((shoe,i) => shoe.id === action.id ? action.item : shoe)
       }
       case "REMOVE_FROM_CART":
         // Update total price of cart items

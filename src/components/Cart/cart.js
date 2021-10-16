@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import './cart.scss'
 import Stripe from "./Stripe"
 import Header from '../header/header'
-import {removeFromCart} from '../../actions/actions'
+import {addToCart, removeFromCart} from '../../actions/actions'
 import { connect } from "react-redux";
 import StripeDemoAlert from "./StripeDemoAlert";
- function Cart({cart,removeFromCart}) {
+import QuantityBox from "./QuantityBox";
+ function Cart({cart,removeFromCart,addToCart}) {
    let [total,setTotal] = useState({})
    const getTotal = () => {
      let sub = 0
-    if (localStorage.getItem("cart")){
-     JSON.parse(localStorage.getItem("cart")).cart.map(a => sub += a.retailPrice)
+   if (cart){
+     cart.map(a => sub += a.total)
      console.log(sub)
     }
     setTotal(
@@ -21,9 +22,12 @@ import StripeDemoAlert from "./StripeDemoAlert";
     })
     console.log(total)
   }
+  console.log(cart)
+
    useEffect(() => {
+     localStorage.setItem("cart",JSON.stringify(cart))
       getTotal()
-   },[cart.length])
+   },[cart])
      
      
     console.log(total)
@@ -45,12 +49,13 @@ import StripeDemoAlert from "./StripeDemoAlert";
                 <div className="cartSection">
                   <img src={sneaker.media.smallImageUrl} alt="" className="itemImg" />
                   <p className="itemNumber">{sneaker.id }</p>
-                  <h3>{sneaker.title}</h3>
-                  
-                  <p className="stockStatus"> In Stock</p>
+                  <Link to={`/product/${sneaker.id}`}><h3>{sneaker.title}</h3> </Link>
+                  <div style={{"display":"inline-flex"}}>
+                  <QuantityBox amount={sneaker.quantity} item={sneaker} addToCart={addToCart}/>
+                  </div>
                 </div>  
                 <div className="prodTotal cartSection">
-                  <p>${sneaker.retailPrice}</p>
+                  <p>${sneaker.total}</p>
                 </div>
                 <div className="cartSection removeWrap" onClick={e => removeFromCart(sneaker.id)}>
                   <button className="remove">x</button>
@@ -84,11 +89,14 @@ import StripeDemoAlert from "./StripeDemoAlert";
             }
             function mapStateToProps(state) {
                 return {
-                  cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : [],
+                  cart: state.cart,
                 }
               }
               const mapDispatchToProps = (dispatch) => {
                 return {
+                  addToCart: (item,quantity) => {
+                    dispatch(addToCart(item,quantity))
+                  },
                   removeFromCart: (id) => {
                     dispatch(removeFromCart(id))
                   }

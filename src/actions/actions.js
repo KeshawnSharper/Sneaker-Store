@@ -1,10 +1,12 @@
 import axios from "axios";
 
-export function addToCart (item) {
+export function addToCart (item,quantity) {
+    item.quantity = Number(quantity)
+    item.total = quantity * item.retailPrice
     console.log(item)
     return {
         type: "ADD_TO_CART",
-        item,
+        item:item
       };
 }
 

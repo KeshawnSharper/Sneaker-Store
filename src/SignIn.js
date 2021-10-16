@@ -9,6 +9,7 @@ export default function SignIn(props) {
        email:"",
        password:""
    })
+   const [error,setError] = useState({})
    const [loading,setLoading] = useState(false)
    const handleChange = e => {
        setUser({...user,
@@ -18,7 +19,7 @@ export default function SignIn(props) {
    const handleSubmit = e => {
        e.preventDefault()
        setLoading(true)
-   axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
+   axios.post(`http://localhost:5000/login`,user).then(
        res => {
         setLoading(false)
         localStorage.setItem(`email`,res.data.email)
@@ -31,6 +32,7 @@ export default function SignIn(props) {
    )
    .catch(
     err => {
+      setError({...error,message:err.response.data.message})
       setLoading(false)
       console.log(err)
     }
@@ -52,6 +54,7 @@ export default function SignIn(props) {
     <div className="main">
       <p className="sign" align="center">Sign in</p>
       <form className="form1">
+      <p style={{"textAlign":"center","color": "#d53369"}}>{error.message}</p>
         <input className="un " onChange={handleChange} name="email"type="text" align="center" placeholder="Email" />
         <input className="pass" onChange={handleChange} name="password"type="password" align="center" placeholder="Password" />
         <button className="submit" align="center" onClick={handleSubmit}>Sign in</button>
