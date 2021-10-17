@@ -1,7 +1,6 @@
 import React,{useState} from "react"
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-
 const QuantityBox = ({item,amount,addToCart,cart=false}) => {
     const [quantity,setQuantity] = useState(cart ? amount : amount + 1)
     const handleQuantity = (props) => {

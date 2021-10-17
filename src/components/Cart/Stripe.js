@@ -62,7 +62,7 @@ function Stripe(props) {
         product.country = info.shipping_address_country;
         product.delivered = false;
         product.date_ordered = new Date();
-        axios.post("http://localhost:5000/orders", product).then((res) => {
+        axios.post("https://heir-shoes-be.herokuapp.com/orders", product).then((res) => {
           console.log(res);
         })
         .catch((err) => console.log(err))

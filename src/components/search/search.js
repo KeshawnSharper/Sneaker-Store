@@ -36,7 +36,6 @@ export default function Search(props) {
   const [brand,setBrand] = useState("")
   const [year,setYear] = useState("")
   const [price,setPrice] = useState({max:"",min:""})
-  console.log(props.match.params.shoe)
   const [sneakers,setSneakers] = useState([])
   const [searchedSneakers,setSearchedSneakers] = useState([])
   const classes = useStyles();
@@ -55,7 +54,6 @@ export default function Search(props) {
         sneak.media.imageUrl !== null
       ))
       setSneakers(shoes)
-      console.log(sneakers,shoes)
       if (localStorage.getItem("brand") !== ""){
         shoes = shoes.filter(sneak => (
           sneak.brand === localStorage.getItem("brand")
@@ -67,7 +65,6 @@ export default function Search(props) {
   else{
   setSneakers(JSON.parse(localStorage.getItem("sneakers")))
   if (localStorage.getItem("brand") !== ""){
-    console.log(sneakers)
   setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")).filter(sneak => (
     sneak.brand === localStorage.getItem("brand")
   )))
@@ -75,9 +72,8 @@ export default function Search(props) {
   else{
     setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
   }
-  console.log("branded",searchedSneakers)
   }
-  },[searchedSneakers,sneakers])
+  },[sneakers,searchedSneakers])
  
 
   const handleGender = (event) => {
@@ -130,7 +126,6 @@ export default function Search(props) {
 const reset = () => {
  setSearchedSneakers(sneakers)
 }
-console.log(searchedSneakers)
 
   return (
     <div>

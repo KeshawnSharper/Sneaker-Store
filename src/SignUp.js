@@ -21,9 +21,9 @@ export default function SignUp(props) {
    const handleSubmit = e => {
        e.preventDefault()
        setLoading(true)
-   Axios.post(`http://localhost:5000/register`,user).then(
+   Axios.post(`https://heir-shoes-be.herokuapp.com/register`,user).then(
        res => {
-        Axios.post(`http://localhost:5000/login`,user).then(
+        Axios.post(`https://heir-shoes-be.herokuapp.com/login`,user).then(
        res => {
         localStorage.setItem(`email`,res.data.email)
         localStorage.setItem(`token`,res.data.token)
@@ -36,6 +36,7 @@ export default function SignUp(props) {
    )
 .catch(
     err => {
+      console.log(err)
       setError({...error,message:err.response.data.message})
       setLoading(false)
     }

@@ -9,13 +9,8 @@ function Header({props}) {
   const [value,setValue] = useState("")
   const handleChange = e => {
     setValue(e.target.value)
-    console.log(value)
   }
   useEffect(() => {
-    localStorage.setItem("component","Search" )
-    console.log(localStorage.getItem("component"))
-   
-    // console.log(props)
     if(props){
       if(props.match){
         if(props.match.params){
@@ -30,7 +25,6 @@ function Header({props}) {
   }
   },[props])
 
-  // console.log(props.match)
 return (
 <header className={styles.header}>
     <div className={styles.innerHeader}>
