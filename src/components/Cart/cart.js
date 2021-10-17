@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Link } from "react-router-dom";
 import './cart.scss'
-import Stripe from "./Stripe"
 import Header from '../header/header'
 import {addToCart, removeFromCart} from '../../actions/actions'
 import { connect } from "react-redux";
@@ -9,7 +8,7 @@ import StripeDemoAlert from "./StripeDemoAlert";
 import QuantityBox from "./QuantityBox";
  function Cart({cart,removeFromCart,addToCart}) {
    let [total,setTotal] = useState({})
-   const getTotal = () => {
+   const getTotal =  useCallback(() => {
      let sub = 0
    if (cart){
      cart.map(a => sub += a.total)
@@ -21,13 +20,13 @@ import QuantityBox from "./QuantityBox";
       total : Number((Number(sub) + Number(4.99) + Number(sub * 0.07))).toFixed(2)
     })
     console.log(total)
-  }
+  },[cart,total])
   console.log(cart)
 
    useEffect(() => {
      localStorage.setItem("cart",JSON.stringify(cart))
       getTotal()
-   },[cart])
+   },[cart,getTotal])
      
      
     console.log(total)

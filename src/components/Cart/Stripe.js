@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-// import { purchase } from "../actions/StoreActions";
 import { toast } from "react-toastify";
 import StripeCheckout from "react-stripe-checkout";
 import {removeCart} from '../../actions/actions'

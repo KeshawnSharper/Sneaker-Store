@@ -13,7 +13,6 @@ import Orders from './components/Orders/orders'
 import ProtectedRoute from './ProtectedRoute'
 
 import './styles.css'
-import Home from './home'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 function App() {

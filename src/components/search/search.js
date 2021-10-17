@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './search.css'
 import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -32,15 +32,10 @@ const useStyles = makeStyles({
 });
 
 export default function Search(props) {
-  const [value,setValue] = useState("")
   const [gender,setGender] = useState("")
   const [brand,setBrand] = useState("")
   const [year,setYear] = useState("")
   const [price,setPrice] = useState({max:"",min:""})
-  const handleChange = e => {
-    setValue(e.target.value)
-    console.log(value)
-  }
   console.log(props.match.params.shoe)
   const [sneakers,setSneakers] = useState([])
   const [searchedSneakers,setSearchedSneakers] = useState([])
@@ -82,17 +77,9 @@ export default function Search(props) {
   }
   console.log("branded",searchedSneakers)
   }
-  },[sneakers.length])
+  },[searchedSneakers,sneakers])
  
-  const search = () => {
-    
-    if (value !== "" ){
-      setSearchedSneakers(sneakers.filter(sneaker => sneaker.brand.toUpperCase().includes(value.toUpperCase()) || sneaker.colorway.toUpperCase().includes(value.toUpperCase()) || sneaker.gender.toUpperCase().includes(value.toUpperCase()) ||sneaker.name.toUpperCase().includes(value.toUpperCase()) || sneaker.shoe.toUpperCase().includes(value.toUpperCase())))
-    }else{
-      setSearchedSneakers(sneakers)
-    }
-      
-  }
+
   const handleGender = (event) => {
     console.log(event.target.value)
     if (event.target.value === gender){

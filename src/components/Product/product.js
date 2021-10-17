@@ -6,13 +6,11 @@ import {addToCart} from '../../actions/actions'
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux"
-import TextField from '@mui/material/TextField';
 import QuantityBox from "../Cart/QuantityBox";
 
 
 function Product(props) {
     const [sneaker,setSneaker] = useState({})
-    const [quantity,setQuanity] = useState(1)
     useEffect(() => {
         setSneaker(JSON.parse(localStorage.getItem("sneakers")).filter(item => item.id === props.match.params.id)[0])
       },[props.match.params.id])

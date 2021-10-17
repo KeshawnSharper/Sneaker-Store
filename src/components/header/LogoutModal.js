@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import Stripe from '../Cart/Stripe';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
 
