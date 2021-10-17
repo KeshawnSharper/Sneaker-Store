@@ -73,7 +73,7 @@ export default function Search(props) {
     setSearchedSneakers(JSON.parse(localStorage.getItem("sneakers")))
   }
   }
-  },[sneakers,searchedSneakers])
+  },[sneakers.length])
  
 
   const handleGender = (event) => {
@@ -136,7 +136,7 @@ const reset = () => {
     ?
     <div style={{"width":"800px", "margin":"0 auto"}}>
     <Loader type="Puff" color="#00BFFF" /> 
-    <p>Loading Sneakers</p>
+    <p>Loading Sneakers... (if search take too long may not have any results,refresh and try again)</p>
     </div>
     :
   <div className="list">
