@@ -1,10 +1,10 @@
 import react,{useState} from "react"
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { useHistory } from "react-router-dom";
 
-const QuantityBox = ({item,amount,addToCart}) => {
-    const originalQuantity = amount
-    const [quantity,setQuantity] = useState(amount)
+const QuantityBox = ({item,amount,addToCart,cart=false}) => {
+    const [quantity,setQuantity] = useState(cart ? amount : amount + 1)
     const handleQuantity = (props) => {
         if (props === "add"){
             setQuantity(quantity + 1)
@@ -13,14 +13,18 @@ const QuantityBox = ({item,amount,addToCart}) => {
             setQuantity(quantity - 1)
         }
     }
+    const addItem = () =>{
+        addToCart(item,quantity)
+        
+    }
     return(
         <>
         <ArrowLeftIcon onClick={() => handleQuantity("minus")} />
         <br></br>
-        <input style={{"width":"25px","height":"25px"}} value={quantity} />
+        <input style={{"width":"25px","height":"25px"}} value={quantity } />
         <br></br>
         <ArrowRightIcon onClick={() => handleQuantity("add")} />
-        {quantity !== originalQuantity ? <button className="continue" onClick={() => addToCart(item,quantity)}>Save Changes</button> : null }
+        {quantity !== amount ? <button className="add-to-cart" onClick={addItem}>Save to Cart</button> : null }
         </>
     )
 }

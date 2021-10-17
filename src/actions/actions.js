@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function addToCart (item,quantity) {
+export function addToCart (item,quantity,history=null) {
     item.quantity = Number(quantity)
     item.total = quantity * item.retailPrice
     console.log(item)

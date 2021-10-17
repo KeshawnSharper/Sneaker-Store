@@ -51,7 +51,8 @@ import QuantityBox from "./QuantityBox";
                   <p className="itemNumber">{sneaker.id }</p>
                   <Link to={`/product/${sneaker.id}`}><h3>{sneaker.title}</h3> </Link>
                   <div style={{"display":"inline-flex"}}>
-                  <QuantityBox amount={sneaker.quantity} item={sneaker} addToCart={addToCart}/>
+                  <QuantityBox amount={sneaker.quantity} item={sneaker} addToCart={addToCart} cart={true}/>
+                  
                   </div>
                 </div>  
                 <div className="prodTotal cartSection">

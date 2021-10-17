@@ -12,20 +12,6 @@ export const StoreReducer = (state = initState, action) => {
       case "REMOVE_FROM_CART":
         // Update total price of cart items
         // Subtract item base price + item quantity
-        let cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(action.payload !== cart.cart[0].id)
-        // console.log(cart.cart[0].id)
-        let index = cart.cart.find(sneaker => sneaker.id === action.payload)
-        let price = index.retailPrice
-        index = cart.cart.indexOf(index)
-        console.log(index)
-        cart.cart = cart.cart.filter((_,i) => (
-
-          i !== index
-                    ))
-        localStorage.setItem("cart",JSON.stringify(cart)) 
-        localStorage.setItem("total",Number(localStorage.getItem("total")) - Number(price)) 
-        console.log(cart)
         return {
           ...state,
           cart:state.cart.filter(sneaker => (

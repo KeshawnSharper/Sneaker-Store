@@ -7,9 +7,9 @@ import StripeCheckout from "react-stripe-checkout";
 import {removeCart} from '../../actions/actions'
 import Loader from "react-loader-spinner";
 // toast.configure;
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
   return {
-    cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cart : [],
+    cart: state.cart,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -49,7 +49,8 @@ function Stripe(props) {
       const product = {}
       product.index = i
       product.user_id = Number(localStorage.getItem("id"))
-      product.price = item.retailPrice
+      product.price = item.total
+      product.quantity = item.quantity
       product.img = item.media.smallImageUrl
       product.name = item.title
       product.product_id = item.id;
@@ -62,7 +63,7 @@ function Stripe(props) {
         product.country = info.shipping_address_country;
         product.delivered = false;
         product.date_ordered = new Date();
-        axios.post("https://heir-shoes-be.herokuapp.com/orders", product).then((res) => {
+        axios.post("http://localhost:5000/orders", product).then((res) => {
           console.log(res);
         })
         .catch((err) => console.log(err))

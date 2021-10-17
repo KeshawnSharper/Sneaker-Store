@@ -43,7 +43,7 @@ import axios from "axios";
                   <p className="itemNumber">{sneaker.date_ordered }</p>
                   <h3>{sneaker.name}</h3>
                   <h3>{sneaker.street}</h3>
-                  {/* <p className="stockStatus"> In Stock</p> */}
+                  <p className="stockStatus"> Quantity : {sneaker.quantity}</p>
                 </div>  
                 <div className="prodTotal cartSection">
                   <p>${sneaker.price}</p>

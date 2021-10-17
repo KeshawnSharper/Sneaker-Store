@@ -7,6 +7,7 @@ import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux"
 import TextField from '@mui/material/TextField';
+import QuantityBox from "../Cart/QuantityBox";
 
 
 function Product(props) {
@@ -55,17 +56,17 @@ function Product(props) {
               </div>
               <div className="column-xs-12 column-md-5">
                 <h1>{sneaker.title}</h1>
+               
                 <h2>${sneaker.retailPrice}</h2>
+                
+                <div style={{"display":"inline-flex"}}>
+                <QuantityBox amount={props.cart.filter(item => item.id === sneaker.id).length === 1 ? props.cart.filter(item => item.id === sneaker.id)[0].quantity  : 0} item={sneaker} addToCart={props.addToCart} cart={false}/>
+                </div>
                 {/* <div className="description">
                   <p>The purposes of bonsai are primarily contemplation for the viewer, and the pleasant exercise of effort and ingenuity for the grower.</p>
                   <p>By contrast with other plant cultivation practices, bonsai is not intended for production of food or for medicine. Instead, bonsai practice focuses on long-term cultivation and shaping of one or more small trees growing in a container.</p>
                 </div> */}
-                <div style={{"display":"inline-flex","marginRight":"20px"}}>
-                <button style={{"width":"35px","height":"35px"}} disabled={quantity === 1} onClick={() => setQuanity(quantity- 1)}>-</button>
-                <TextField style={{"width":"50px"}} value={quantity}/>
-                <button style={{"width":"35px","height":"35px"}} onClick={() => setQuanity(quantity + 1)}>+</button>
-                </div>
-                <button className="add-to-cart" onClick={e => props.addToCart(sneaker,quantity)}>Add To Cart</button>
+                
               </div>
             </div>
             <div className="grid related-products">
